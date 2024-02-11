@@ -4,3 +4,6 @@
 *.so
 .envrc
 .direnv
+.vscode
+bin/*
+!bin/.gitkeep
