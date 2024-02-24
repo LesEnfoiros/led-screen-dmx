@@ -32,7 +32,7 @@ class Gif:
 
     # Render the GIF.
     def render(self, screen):
-        screen.matrix.SwapOnVSync(self.canvases[self.current_frame], framerate_fraction=10)
+        screen.matrix.SwapOnVSync(self.canvases[self.current_frame], framerate_fraction=5)
 
         if self.current_frame == self.num_frames - 1:
             self.current_frame = 0

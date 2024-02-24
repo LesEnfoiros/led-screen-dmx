@@ -5,7 +5,7 @@ import sys
 screen = Screen()
 ascenseur = Ascenseur()
 
-gif = Gif("assets/gif/carre.gif")
+gif = Gif("assets/gif/ah.gif")
 gif.load(screen)
 
 try:
@@ -13,13 +13,13 @@ try:
     print("Press CTRL-C to stop sample")
 
     while True:
-        screen.clear()
+        #screen.clear()
 
         # Render the components.
         #ascenseur.render(screen=screen)
         gif.render(screen)
 
-        screen.swap()
+        #screen.swap()
 except KeyboardInterrupt:
     print("Exiting\n")
     sys.exit(0)
