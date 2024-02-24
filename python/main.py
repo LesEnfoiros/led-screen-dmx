@@ -27,7 +27,7 @@ try:
         # Render the components.
         ascenseur.render(screen=screen)
         print("Order: " + str(DMX.get(DMX.DMX_CHANNEL_ORDER)))
-        DMX.manage()
+        DMX.manage(screen, ascenseur)
         #gif.render(screen)
 
         screen.swap()
