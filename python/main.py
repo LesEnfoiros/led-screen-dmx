@@ -5,7 +5,7 @@ import sys
 screen = Screen()
 ascenseur = Ascenseur()
 
-gif = Gif("assets/gif/oss117.gif")
+gif = Gif("assets/gif/carre.gif")
 gif.load(screen)
 
 try:
