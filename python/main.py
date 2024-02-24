@@ -1,10 +1,12 @@
-from enfoiros import ascenseur as ascenseur_lib
-from enfoiros import screen as screen_lib
+from enfoiros import Ascenseur, Screen, Gif
 import sys
 
 # Create and instanciate the matrix.
-screen = screen_lib.Screen()
-ascenseur = ascenseur_lib.Ascenseur()
+screen = Screen()
+ascenseur = Ascenseur()
+
+gif = Gif("assets/gif/oss117.gif")
+gif.load()
 
 try:
     # Start loop
@@ -14,7 +16,8 @@ try:
         screen.clear()
 
         # Render the components.
-        ascenseur.render(screen=screen)
+        #ascenseur.render(screen=screen)
+        gif.render()
 
         screen.swap()
 except KeyboardInterrupt:
