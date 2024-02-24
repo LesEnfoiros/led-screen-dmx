@@ -20,6 +20,8 @@ class Gif:
         gif = Gif(file_name, rate)
         gif.load(screen)
 
+        return gif
+
     # Load the gif.
     def load(self, screen):
         gif = Image.open(self.path)
