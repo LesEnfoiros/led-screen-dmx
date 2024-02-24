@@ -14,23 +14,20 @@ ascenseur = Ascenseur()
 # get the values from the Arduino.
 DMX.start()
 
-#gif = Gif("assets/gif/gyrophare.gif")
-#gif.load(screen)
-
 try:
     # Start loop
     print("Press CTRL-C to stop sample")
 
     while True:
-        screen.clear()
+        if screen.bullshit is None:
+            screen.clear()
+            print("Order: " + str(DMX.get(DMX.DMX_CHANNEL_ORDER)))
+            ascenseur.render(screen=screen)
+            screen.swap()
+        else:
+            screen.bullshit.render(screen)
 
-        # Render the components.
-        ascenseur.render(screen=screen)
-        print("Order: " + str(DMX.get(DMX.DMX_CHANNEL_ORDER)))
         DMX.manage(screen, ascenseur)
-        #gif.render(screen)
-
-        screen.swap()
 except KeyboardInterrupt:
     print("Exiting\n")
     DMX.stop()

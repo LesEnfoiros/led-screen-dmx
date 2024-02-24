@@ -51,32 +51,30 @@ class Ascenseur:
 
             # This is done to make the "HS" text "strobbing".""
             if rand == 7:
-                screen.drawText(0, screen.font_baseline, "H")
+                screen.drawText("H", 0, screen.font_baseline)
             elif rand == 2:
-                screen.drawText(0, screen.font_baseline, " S")
+                screen.drawText(" S", 0, screen.font_baseline)
             elif rand % 10 != 9:
-                screen.drawText(0, screen.font_baseline, "HS")
+                screen.drawText("HS", 0, screen.font_baseline)
+        else:
+            is_negative = self.current_stair < 0
+            level = - self.current_stair if is_negative else self.current_stair
 
-            return
-            
-        is_negative = self.current_stair < 0
-        level = - self.current_stair if is_negative else self.current_stair
+            # Draw the ciffer.
+            screen.drawText(text=level, x=36, y=screen.font_baseline)
 
-        # Draw the ciffer.
-        screen.drawText(text=level, x=36, y=screen.font_baseline)
+            # Draw the minus if the stair is negative.
+            if is_negative:
+                self._drawMinus(screen)
 
-        # Draw the minus if the stair is negative.
-        if is_negative:
-            self._drawMinus(screen)
+            # Draw the arrow.
+            self._drawArrow(screen)
 
-        # Draw the arrow.
-        self._drawArrow(screen)
+            # Move to the next stair if needed.
+            if self.current_stair != self.target_stair:
+                self.current_stair += -1 if self.current_stair > self.target_stair else 1
 
-        # Move to the next stair if needed.
-        if self.current_stair != self.target_stair:
-            self.current_stair += -1 if self.current_stair > self.target_stair else 1
-
-        screen.sleep(SECONDS_BETWEEN_FRAME)
+            screen.sleep(SECONDS_BETWEEN_FRAME)
 
 
     # Tell the ascenseur to go to the given stair.

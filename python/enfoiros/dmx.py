@@ -1,4 +1,5 @@
 import wiringpi as wp
+from .gif import Gif
 import threading
 import time
 
@@ -73,7 +74,8 @@ def _thread():
     wp.wiringPiI2CClose(dmx_fd)
     print("DMX thread stopped")
 
-
+# Manage the orders coming from the DMX regarding
+# where the ascenseur should go.
 def _manage_order(ascenseur, order: int):
     # Upper stairs.
     if order >= 0 and order < 10:
@@ -106,8 +108,32 @@ def _manage_order(ascenseur, order: int):
         ascenseur.is_hors_service = True
         ascenseur.current_stair = ascenseur.target_stair
 
-def manage(screen, ascenseur):
-    order = get(DMX_CHANNEL_ORDER)
 
+def _manage_bullshit(screen, ascenseur, order: int):
+    # Upper stairs.
+    if order >= 10 and order < 20:
+        screen.bullshit = Gif.build("assets/gif/gyrophare.gif", 10)
+    elif order >= 20 and order < 30:
+        screen.bullshit = Gif.build("assets/gif/gyrophare.gif", 10)
+
+
+def manage(screen, ascenseur):
+    # Update the global color.
+    #screen.text_color.red = get(DMX_CHANNEL_COLOR_R)
+    #screen.text_color.green = get(DMX_CHANNEL_COLOR_G)
+    #screen.text_color.blue = get(DMX_CHANNEL_COLOR_B)
+
+    # Manage the orders for the ascenseur.
+    order = get(DMX_CHANNEL_ORDER)
     if order > 0:
+        screen.bullshit = None
         _manage_order(ascenseur, order)
+
+        return
+
+    # Display the bullshit if needed.
+    bullshit = get(DMX_CHANNEL_BULLSHIT)
+    if order > 0:
+        _manage_bullshit(screen, ascenseur, order)
+
+        return

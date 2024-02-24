@@ -1,12 +1,24 @@
 from PIL import Image
 import sys
 
+GIF_BANK = {
+    'gyrophare.gif': 10,
+    'ah.gif': 5,
+    'oss117.gif': 5,
+    'marc.gif': 10,
+}
+
 class Gif:
     # Initialize the GIF.
-    def __init__(self, path):
+    def __init__(self, path, rate):
         self.path = path
+        self.rate = rate
         self.canvases = []
         self.current_frame = 0
+
+    def build(screen, file_name, rate):
+        gif = Gif(file_name, rate)
+        gif.load(screen)
 
     # Load the gif.
     def load(self, screen):
@@ -32,7 +44,7 @@ class Gif:
 
     # Render the GIF.
     def render(self, screen):
-        screen.matrix.SwapOnVSync(self.canvases[self.current_frame], framerate_fraction=5)
+        screen.matrix.SwapOnVSync(self.canvases[self.current_frame], framerate_fraction=self.rate)
 
         if self.current_frame == self.num_frames - 1:
             self.current_frame = 0
