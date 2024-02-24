@@ -106,7 +106,8 @@ def _manage_order(ascenseur, order: int):
         ascenseur.current_stair = ascenseur.target_stair
 
 
-def _manage_bullshit(screen, ascenseur, order: int):
+# Manage the bullshit channel.
+def _manage_bullshit(screen, order: int):
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
     # Upper stairs.
@@ -114,8 +115,12 @@ def _manage_bullshit(screen, ascenseur, order: int):
         screen.bullshit = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
     elif order >= 20 and order < 30 and current_path != "assets/gif/oss117.gif":
         screen.bullshit = Gif.build(screen, "assets/gif/oss117.gif", 5)
+    elif order >= 30 and order < 40 and current_path != "assets/gif/ah.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/ah.gif", 10)
+    elif order >= 40 and order < 50 and current_path != "assets/gif/marc.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/marc.gif", 10)
 
-
+# Globally manage the DMX signals.
 def manage(screen, ascenseur):
     # Update the global color.
     #screen.text_color.red = get(DMX_CHANNEL_COLOR_R)
@@ -124,17 +129,14 @@ def manage(screen, ascenseur):
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
-    print(order)
     if order > 0:
-        #screen.bullshit = None
-        _manage_bullshit(screen, ascenseur, order)
-        #_manage_order(ascenseur, order)
+        _manage_order(ascenseur, order)
 
         return
 
     # Display the bullshit if needed.
     bullshit = get(DMX_CHANNEL_BULLSHIT)
-    if order > 0:
-        _manage_bullshit(screen, ascenseur, order)
+    if bullshit > 0:
+        _manage_bullshit(screen, bullshit)
 
         return

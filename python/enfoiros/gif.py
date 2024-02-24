@@ -1,13 +1,6 @@
 from PIL import Image
 import sys
 
-GIF_BANK = {
-    'gyrophare.gif': 10,
-    'ah.gif': 5,
-    'oss117.gif': 5,
-    'marc.gif': 10,
-}
-
 class Gif:
     # Initialize the GIF.
     def __init__(self, path, rate):
