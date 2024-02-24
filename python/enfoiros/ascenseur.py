@@ -66,4 +66,8 @@ class Ascenseur:
 
     # Tell the ascenseur to go to the given stair.
     def goToStair(self, stair):
+        if self.current_stair == stair or self.target_stair == stair:
+            return
+            
         self.target_stair = stair
+        self.is_hors_service = False
