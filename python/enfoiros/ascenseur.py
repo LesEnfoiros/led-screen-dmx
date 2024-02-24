@@ -12,7 +12,7 @@ class Ascenseur:
     # Render the ascenseur. This method is not
     # always called.
     def render(self, screen):
-        screen.drawText(text=self.current_stair, x=36, y=48)
+        screen.drawText(text=self.current_stair, x=36, y=screen.font_baseline)
     
         if self.current_stair != self.target_stair:
             self.current_stair += -1 if self.current_stair > self.target_stair else 1

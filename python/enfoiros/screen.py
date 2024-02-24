@@ -35,6 +35,7 @@ class Screen:
 
         # Initialise the font color.
         self.text_color = graphics.Color(255, 255, 255)
+        self.font_baseline = 52
 
     # Go to next frame.
     def clear(self):
