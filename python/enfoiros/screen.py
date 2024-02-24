@@ -49,6 +49,10 @@ class Screen:
     def drawText(self, text, x, y):
         graphics.DrawText(self.canvas, self.font, x, y, self.text_color, str(text))
 
+    # Draw a pixel at the given coordinates.
+    def drawPixel(self, x, y):
+        self.canvas.SetPixel(x, y, self.text_color.r, self.text_color.g, self.text_color.b)
+
     # Make the program stop for a given number of seconds.
     def sleep(self, nbr_seconds):
         time.sleep(nbr_seconds)
