@@ -1,6 +1,5 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
-import time
-import sys
+
 
 # GLOBAL VARIABLES.
 MATRIX_SIZE = 64
@@ -36,34 +35,12 @@ class Screen:
         self.text_color = graphics.Color(255, 255, 0)
 
     # Go to next frame.
-    def next(self):
-        self.matrix.SwapOnVSync(self.canvas)
-        self.canvas.clear()
+    def clear(self):
+        self.canvas.Clear()
+
+    def swap(self):
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
 
     # Draw a text in the screen.
     def drawText(self, text, x, y):
         graphics.DrawText(self.canvas, self.font, x, y, self.text_color, str(text))
-
-
-
-
-try:
-    # Start loop
-    print("Press CTRL-C to stop sample")
-    
-    offscreen_canvas = matrix.CreateFrameCanvas()
-    font = graphics.Font()
-    font.LoadFont("assets/font-32x64.bdf")
-    textColor = graphics.Color(255, 255, 0)
-    pos = offscreen_canvas.width
-    my_text = 1
-
-    while True:
-        offscreen_canvas.Clear()
-        len = graphics.DrawText(offscreen_canvas, font, 0, 64, textColor, my_text)
-
-        time.sleep(1)
-        offscreen_canvas = matrix.SwapOnVSync(offscreen_canvas)
-except KeyboardInterrupt:
-    print("Exiting\n")
-    sys.exit(0)

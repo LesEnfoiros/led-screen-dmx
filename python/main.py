@@ -5,17 +5,18 @@ import sys
 
 # Create and instanciate the matrix.
 screen = screen_lib.Screen()
-ascenseur = ascenseur_lib.Ascenseur(screen=screen)
+ascenseur = ascenseur_lib.Ascenseur()
 
 try:
     # Start loop
     print("Press CTRL-C to stop sample")
 
     while True:
-        ascenseur.render()
+        screen.clear()
+        ascenseur.render(screen)
 
         time.sleep(1)
-        screen.next()
+        screen.swap()
 except KeyboardInterrupt:
     print("Exiting\n")
     sys.exit(0)
