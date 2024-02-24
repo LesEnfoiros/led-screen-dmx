@@ -1,12 +1,17 @@
 from enfoiros import Ascenseur, Screen, Gif
+from enfoiros.dmx import dmx_start
 import sys
 
 # Create and instanciate the matrix.
 screen = Screen()
 ascenseur = Ascenseur()
 
-gif = Gif("assets/gif/ah.gif")
-gif.load(screen)
+dmx_start()
+
+#gif = Gif("assets/gif/ah.gif")
+#gif.load(screen)
+while(True):
+    continue
 
 try:
     # Start loop
