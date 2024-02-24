@@ -22,8 +22,6 @@ $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
 ascenseur: ascenseur.o
-	mv ascenseur.o bin
-	mv ascenseur bin
 
 # All the binaries that have the same name as the object file.q
 % : %.o $(RGB_LIBRARY)
