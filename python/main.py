@@ -13,7 +13,6 @@ ascenseur = Ascenseur()
 # Then, start the DMX thread to dynamically
 # get the values from the Arduino.
 DMX.start()
-DMX.manage(screen, ascenseur)
 
 try:
     # Start loop
