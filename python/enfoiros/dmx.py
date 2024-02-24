@@ -112,9 +112,9 @@ def _manage_order(ascenseur, order: int):
 def _manage_bullshit(screen, ascenseur, order: int):
     # Upper stairs.
     if order >= 10 and order < 20:
-        screen.bullshit = Gif.build("assets/gif/gyrophare.gif", 10)
+        screen.bullshit = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
     elif order >= 20 and order < 30:
-        screen.bullshit = Gif.build("assets/gif/gyrophare.gif", 10)
+        screen.bullshit = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
 
 
 def manage(screen, ascenseur):
@@ -125,9 +125,11 @@ def manage(screen, ascenseur):
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
+    print(order)
     if order > 0:
         screen.bullshit = None
-        _manage_order(ascenseur, order)
+        _manage_bullshit(screen, ascenseur, order)
+        #_manage_order(ascenseur, order)
 
         return
 
