@@ -72,3 +72,42 @@ def _thread():
     # Close the I2C connection.
     wp.wiringPiI2CClose(dmx_fd)
     print("DMX thread stopped")
+
+
+def _manage_order(ascenseur, order: int):
+    # Upper stairs.
+    if order >= 0 and order < 10:
+        ascenseur.goToStair(5)
+    elif order >= 10 and order < 20:
+        ascenseur.goToStair(4)
+    elif order >= 20 and order < 30:
+        ascenseur.goToStair(3)
+    elif order >= 30 and order < 40:
+        ascenseur.goToStair(2)
+    elif order >= 40 and order < 50:
+        ascenseur.goToStair(1)
+    elif order >= 50 and order < 60:
+        ascenseur.goToStair(0)
+    
+    # Lower stairs.
+    elif order >= 60 and order < 70:
+        ascenseur.goToStair(-1)
+    elif order >= 70 and order < 80:
+        ascenseur.goToStair(-2)
+    elif order >= 80 and order < 90:
+        ascenseur.goToStair(-3)
+    elif order >= 90 and order < 100:
+        ascenseur.goToStair(-4)
+    elif order >= 100 and order < 110:
+        ascenseur.goToStair(-5)
+    
+    # HS animation.
+    elif order >= 110 and order < 120:
+        ascenseur.is_hors_service = True
+        ascenseur.current_stair = ascenseur.target_stair
+
+def manage(screen, ascenseur):
+    order = get(DMX_CHANNEL_ORDER)
+
+    if order > 0:
+        _manage_order(ascenseur, order)

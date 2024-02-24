@@ -14,8 +14,8 @@ ascenseur = Ascenseur()
 # get the values from the Arduino.
 DMX.start()
 
-gif = Gif("assets/gif/gyrophare.gif")
-gif.load(screen)
+#gif = Gif("assets/gif/gyrophare.gif")
+#gif.load(screen)
 
 try:
     # Start loop
@@ -27,6 +27,7 @@ try:
         # Render the components.
         ascenseur.render(screen=screen)
         print("Order: " + str(DMX.get(DMX.DMX_CHANNEL_ORDER)))
+        DMX.manage()
         #gif.render(screen)
 
         screen.swap()

@@ -1,3 +1,5 @@
+import random
+
 # GLOBAL VARIABLES.
 SECONDS_BETWEEN_FRAME = 1
 ARROW_WIDTH = 30
@@ -44,6 +46,19 @@ class Ascenseur:
     # Render the ascenseur. This method is not
     # always called.
     def render(self, screen):
+        if self.is_hors_service:
+            rand = random.randint(0, 10)
+
+            # This is done to make the "HS" text "strobbing".""
+            if rand == 7:
+                screen.drawText(0, screen.font_baseline, "H")
+            elif rand == 2:
+                screen.drawText(0, screen.font_baseline, " S")
+            elif rand % 10 != 9:
+                screen.drawText(0, screen.font_baseline, "HS")
+
+            return
+            
         is_negative = self.current_stair < 0
         level = - self.current_stair if is_negative else self.current_stair
 
