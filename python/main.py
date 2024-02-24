@@ -6,7 +6,7 @@ screen = Screen()
 ascenseur = Ascenseur()
 
 gif = Gif("assets/gif/oss117.gif")
-gif.load()
+gif.load(screen)
 
 try:
     # Start loop
