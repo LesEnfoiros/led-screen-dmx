@@ -119,6 +119,9 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "assets/gif/ah.gif", 10)
     elif order >= 40 and order < 50 and current_path != "assets/gif/marc.gif":
         screen.bullshit = Gif.build(screen, "assets/gif/marc.gif", 10)
+    elif order >= 50 and order < 60 and current_path != "assets/gif/fire.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/fire.gif", 10)
+
 
 # Globally manage the DMX signals.
 def manage(screen, ascenseur):
@@ -126,6 +129,7 @@ def manage(screen, ascenseur):
     #screen.text_color.red = get(DMX_CHANNEL_COLOR_R)
     #screen.text_color.green = get(DMX_CHANNEL_COLOR_G)
     #screen.text_color.blue = get(DMX_CHANNEL_COLOR_B)
+    print("Color: (%s, %s, %s)" % (get(DMX_CHANNEL_COLOR_R), get(DMX_CHANNEL_COLOR_G), get(DMX_CHANNEL_COLOR_B)))
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
