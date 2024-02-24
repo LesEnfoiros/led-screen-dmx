@@ -17,7 +17,7 @@ try:
 
         # Render the components.
         #ascenseur.render(screen=screen)
-        gif.render()
+        gif.render(screen)
 
         screen.swap()
 except KeyboardInterrupt:
