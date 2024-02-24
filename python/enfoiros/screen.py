@@ -19,7 +19,7 @@ class Screen:
         options = RGBMatrixOptions()
         options.rows = MATRIX_SIZE
         options.cols = MATRIX_SIZE
-        options.chain_length = 2
+        options.chain_length = 1
         options.parallel = 1
         options.hardware_mapping = 'regular'  # If you have an Adafruit HAT: 'adafruit-hat'
 
@@ -35,6 +35,7 @@ class Screen:
 
         # Initialise the font color.
         self.text_color = graphics.Color(255, 255, 255)
+        self.font_baseline = self.font.baseline()
 
     # Go to next frame.
     def clear(self):

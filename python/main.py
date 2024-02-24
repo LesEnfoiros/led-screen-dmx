@@ -22,7 +22,6 @@ try:
         else:
             i += 1
 
-        time.sleep(1)
         screen.swap()
 except KeyboardInterrupt:
     print("Exiting\n")
