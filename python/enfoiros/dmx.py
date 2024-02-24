@@ -67,7 +67,7 @@ def _thread():
         _update_channel_value_from_i2c(DMX_CHANNEL_BULLSHIT)
         _update_channel_value_from_i2c(DMX_CHANNEL_ORDER)
 
-        time.sleep(0.5)
+        time.sleep(0.2)
 
     print("DMX thread stopped")
 
@@ -126,10 +126,9 @@ def _manage_bullshit(screen, order: int):
 # Globally manage the DMX signals.
 def manage(screen, ascenseur):
     # Update the global color.
-    #screen.text_color.red = get(DMX_CHANNEL_COLOR_R)
-    #screen.text_color.green = get(DMX_CHANNEL_COLOR_G)
-    #screen.text_color.blue = get(DMX_CHANNEL_COLOR_B)
-    print("Color: (%s, %s, %s)" % (get(DMX_CHANNEL_COLOR_R), get(DMX_CHANNEL_COLOR_G), get(DMX_CHANNEL_COLOR_B)))
+    screen.text_color.red = get(DMX_CHANNEL_COLOR_R)
+    screen.text_color.green = get(DMX_CHANNEL_COLOR_G)
+    screen.text_color.blue = get(DMX_CHANNEL_COLOR_B)
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
