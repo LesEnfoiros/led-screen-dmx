@@ -1,4 +1,4 @@
-from enfoiros import Ascenseur, Screen, Gif
+from enfoiros import Ascenseur, Screen
 import enfoiros.dmx as DMX 
 import sys
 
@@ -20,10 +20,12 @@ try:
 
     while True:
         if screen.bullshit is None:
+            print("ASCENSEUR MDE")
             screen.clear()
             ascenseur.render(screen=screen)
             screen.swap()
         else:
+            print("BULLSHIT FOUND")
             screen.bullshit.render(screen)
 
         DMX.manage(screen, ascenseur)

@@ -60,7 +60,6 @@ def _update_channel_value_from_i2c(channel: int):
 def _thread():
     # Lire des données depuis le périphérique I2C
     while(_thread_should_run):
-        print("Iteration")
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_R)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_G)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_B)
@@ -110,11 +109,20 @@ def _manage_order(ascenseur, order: int):
 
 
 def _manage_bullshit(screen, ascenseur, order: int):
+    print("bullshit")
+    new_gif = None
+
     # Upper stairs.
     if order >= 10 and order < 20:
-        screen.bullshit = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
+        print("GYROPHARE")
+        new_gif = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
     elif order >= 20 and order < 30:
-        screen.bullshit = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
+        print("OSS117")
+        new_gif = Gif.build(screen, "assets/gif/oss117.gif", 5)
+
+    if new_gif is not None and (screen.bullshit is None or (new_gif.path != screen.bullshit.path)): 
+        print("JE REMPLACE")
+        screen.bullshit = new_gif
 
 
 def manage(screen, ascenseur):
@@ -127,7 +135,7 @@ def manage(screen, ascenseur):
     order = get(DMX_CHANNEL_ORDER)
     print(order)
     if order > 0:
-        screen.bullshit = None
+        #screen.bullshit = None
         _manage_bullshit(screen, ascenseur, order)
         #_manage_order(ascenseur, order)
 
