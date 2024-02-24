@@ -22,7 +22,6 @@ try:
     while True:
         if screen.bullshit is None:
             screen.clear()
-            print("Order: " + str(DMX.get(DMX.DMX_CHANNEL_ORDER)))
             ascenseur.render(screen=screen)
             screen.swap()
         else:
