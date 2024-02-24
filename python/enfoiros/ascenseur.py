@@ -1,6 +1,6 @@
-
 # GLOBAL VARIABLES.
 SECONDS_BETWEEN_FRAME = 1
+ARROW_WIDTH = 30
 
 class Ascenseur:
     # Instanciate the ascenseur class.
@@ -8,16 +8,38 @@ class Ascenseur:
         # Static initialisation variables.
         self.current_stair = 0
         self.target_stair = 0 
+        self.is_hors_service = False
+
 
     # Draw the minux sign in the screen.
     def _drawMinus(self, screen):
         # The minus sign appears from:
-        # x=20 to x=34
+        # x=21 to x=34
         # y=28 to y=30
         for i in range(14):
-            screen.drawPixel(i + 20, 28)
-            screen.drawPixel(i + 20, 29)
-            screen.drawPixel(i + 20, 30)
+            screen.drawPixel(i + 21, 28)
+            screen.drawPixel(i + 21, 29)
+            screen.drawPixel(i + 21, 30)
+
+
+    # This function draws an arrow in the screen if
+    # the ascenseur is moving.
+    def _drawArrow(self, screen):
+        if self.current_stair == self.target_stair or self.is_hors_service:
+            return
+
+        top_to_down = self.target_stair < self.current_stair
+        multiplier = 1 if top_to_down else -1
+        head_orig_y = 0 if top_to_down else 64
+
+        for y in range(ARROW_WIDTH):
+            for x in range(ARROW_WIDTH - y):
+                if x < y:
+                    continue
+
+                screen.drawPixel(x, head_orig_y + multiplier * 2 * y)
+                screen.drawPixel(x, head_orig_y + multiplier * 2 * y + multiplier)
+
 
     # Render the ascenseur. This method is not
     # always called.
@@ -32,11 +54,15 @@ class Ascenseur:
         if is_negative:
             self._drawMinus(screen)
 
+        # Draw the arrow.
+        self._drawArrow(screen)
+
         # Move to the next stair if needed.
         if self.current_stair != self.target_stair:
             self.current_stair += -1 if self.current_stair > self.target_stair else 1
 
         screen.sleep(SECONDS_BETWEEN_FRAME)
+
 
     # Tell the ascenseur to go to the given stair.
     def goToStair(self, stair):

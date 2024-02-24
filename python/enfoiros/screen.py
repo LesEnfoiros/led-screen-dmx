@@ -51,7 +51,7 @@ class Screen:
 
     # Draw a pixel at the given coordinates.
     def drawPixel(self, x, y):
-        self.canvas.SetPixel(x, y, self.text_color.r, self.text_color.g, self.text_color.b)
+        self.canvas.SetPixel(x, y, self.text_color.red, self.text_color.green, self.text_color.blue)
 
     # Make the program stop for a given number of seconds.
     def sleep(self, nbr_seconds):
