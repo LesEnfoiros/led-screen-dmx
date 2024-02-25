@@ -75,35 +75,51 @@ def _thread():
 # where the ascenseur should go.
 def _manage_order(ascenseur, order: int):
     # Upper stairs.
-    if order >= 0 and order < 10:
-        ascenseur.goToStair(5)
-    elif order >= 10 and order < 20:
-        ascenseur.goToStair(4)
+    if order >= 10 and order < 20:
+        ascenseur.goToStair(9)
     elif order >= 20 and order < 30:
-        ascenseur.goToStair(3)
+        ascenseur.goToStair(8)
     elif order >= 30 and order < 40:
-        ascenseur.goToStair(2)
+        ascenseur.goToStair(7)
     elif order >= 40 and order < 50:
-        ascenseur.goToStair(1)
+        ascenseur.goToStair(6)
     elif order >= 50 and order < 60:
-        ascenseur.goToStair(0)
-    
-    # Lower stairs.
+        ascenseur.goToStair(5)
     elif order >= 60 and order < 70:
-        ascenseur.goToStair(-1)
+        ascenseur.goToStair(4)
     elif order >= 70 and order < 80:
-        ascenseur.goToStair(-2)
+        ascenseur.goToStair(3)
     elif order >= 80 and order < 90:
-        ascenseur.goToStair(-3)
+        ascenseur.goToStair(2)
     elif order >= 90 and order < 100:
-        ascenseur.goToStair(-4)
+        ascenseur.goToStair(1)
     elif order >= 100 and order < 110:
+        ascenseur.goToStair(0)
+
+    # Lower stairs.
+    elif order >= 110 and order < 120:
+        ascenseur.goToStair(-1)
+    elif order >= 120 and order < 130:
+        ascenseur.goToStair(-2)
+    elif order >= 130 and order < 140:
+        ascenseur.goToStair(-3)
+    elif order >= 140 and order < 150:
+        ascenseur.goToStair(-4)
+    elif order >= 150 and order < 160:
         ascenseur.goToStair(-5)
+    elif order >= 160 and order < 170:
+        ascenseur.goToStair(-6)
+    elif order >= 170 and order < 180:
+        ascenseur.goToStair(-7)
+    elif order >= 180 and order < 190:
+        ascenseur.goToStair(-8)
+    elif order >= 190 and order < 200:
+        ascenseur.goToStair(-9)
     
     # HS animation.
-    elif order >= 110 and order < 120:
+    elif order >= 200 and order < 210:
         ascenseur.is_hors_service = True
-        ascenseur.current_stair = ascenseur.target_stair
+        ascenseur.target_stair = ascenseur.current_stair
 
 
 # Manage the bullshit channel.
@@ -121,6 +137,14 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "assets/gif/marc.gif", 10)
     elif order >= 50 and order < 60 and current_path != "assets/gif/fire.gif":
         screen.bullshit = Gif.build(screen, "assets/gif/fire.gif", 10)
+    elif order >= 60 and order < 70 and current_path != "assets/gif/loading.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/loading.gif", 5)
+    elif order >= 70 and order < 80 and current_path != "assets/gif/notre-projet.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/notre-projet.gif", 5)
+    elif order >= 80 and order < 90 and current_path != "assets/gif/zzz.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/zzz.gif", 10)
+    elif order >= 90 and order < 100 and current_path != "assets/gif/eyes.gif":
+        screen.bullshit = Gif.build(screen, "assets/gif/eyes.gif", 4)
 
 
 # Globally manage the DMX signals.
