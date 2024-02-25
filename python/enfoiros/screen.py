@@ -11,6 +11,7 @@ FONT_ASSET = "assets/font-32x64.bdf"
 class Screen:
     def __init__(self):
         self.bullshit = None
+        self.order_img = None
         self._load_matrix()
         self._load_font()
 

@@ -1,5 +1,6 @@
 import wiringpi as wp
 from .gif import Gif
+from .image import Image
 import threading
 import time
 
@@ -73,54 +74,66 @@ def _thread():
 
 # Manage the orders coming from the DMX regarding
 # where the ascenseur should go.
-def _manage_order(ascenseur, order: int):
+def _manage_order(ascenseur, screen, order: int):
+    new_stair = None
+
     # Upper stairs.
     if order >= 10 and order < 20:
-        ascenseur.goToStair(9)
+        new_stair = 9
     elif order >= 20 and order < 30:
-        ascenseur.goToStair(8)
+        new_stair = 8
     elif order >= 30 and order < 40:
-        ascenseur.goToStair(7)
+        new_stair = 7
     elif order >= 40 and order < 50:
-        ascenseur.goToStair(6)
+        new_stair = 6
     elif order >= 50 and order < 60:
-        ascenseur.goToStair(5)
+        new_stair = 5
     elif order >= 60 and order < 70:
-        ascenseur.goToStair(4)
+        new_stair = 4
     elif order >= 70 and order < 80:
-        ascenseur.goToStair(3)
+        new_stair = 3
     elif order >= 80 and order < 90:
-        ascenseur.goToStair(2)
+        new_stair = 2
     elif order >= 90 and order < 100:
-        ascenseur.goToStair(1)
+        new_stair = 1
     elif order >= 100 and order < 110:
-        ascenseur.goToStair(0)
+        new_stair = 0
 
     # Lower stairs.
     elif order >= 110 and order < 120:
-        ascenseur.goToStair(-1)
+        new_stair = -1
     elif order >= 120 and order < 130:
-        ascenseur.goToStair(-2)
+        new_stair = -2
     elif order >= 130 and order < 140:
-        ascenseur.goToStair(-3)
+        new_stair = -3
     elif order >= 140 and order < 150:
-        ascenseur.goToStair(-4)
+        new_stair = -4
     elif order >= 150 and order < 160:
-        ascenseur.goToStair(-5)
+        new_stair = -5
     elif order >= 160 and order < 170:
-        ascenseur.goToStair(-6)
+        new_stair = -6
     elif order >= 170 and order < 180:
-        ascenseur.goToStair(-7)
+        new_stair = -7
     elif order >= 180 and order < 190:
-        ascenseur.goToStair(-8)
+        new_stair = -8
     elif order >= 190 and order < 200:
-        ascenseur.goToStair(-9)
+        new_stair = -9
     
     # HS animation.
     elif order >= 200 and order < 210:
         ascenseur.is_hors_service = True
         ascenseur.target_stair = ascenseur.current_stair
+    
+    # Logo des restos.
+    elif order >= 210 and order < 220:
+        screen.order_img = Image("assets/restos.png")
+        screen.order_img.load()
 
+    # If the order said to go to a specific stair.
+    if new_stair is not None:
+        ascenseur.goToStair(new_stair)
+        screen.order_img = None
+        
 
 # Manage the bullshit channel.
 def _manage_bullshit(screen, order: int):
@@ -138,26 +151,31 @@ def _manage_bullshit(screen, order: int):
     elif order >= 50 and order < 60 and current_path != "assets/gif/fire.gif":
         screen.bullshit = Gif.build(screen, "assets/gif/fire.gif", 10)
     elif order >= 60 and order < 70 and current_path != "assets/gif/loading.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/loading.gif", 5)
+        screen.bullshit = Gif.build(screen, "assets/gif/loading.gif", 10)
     elif order >= 70 and order < 80 and current_path != "assets/gif/notre-projet.gif":
         screen.bullshit = Gif.build(screen, "assets/gif/notre-projet.gif", 5)
     elif order >= 80 and order < 90 and current_path != "assets/gif/zzz.gif":
         screen.bullshit = Gif.build(screen, "assets/gif/zzz.gif", 10)
     elif order >= 90 and order < 100 and current_path != "assets/gif/eyes.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/eyes.gif", 4)
+        screen.bullshit = Gif.build(screen, "assets/gif/eyes.gif", 2)
 
+# Get the color from the DMX signal.
+def _get_color(channel: int):
+    value = get(channel)
+
+    return value if value >= 0 else 0
 
 # Globally manage the DMX signals.
 def manage(screen, ascenseur):
     # Update the global color.
-    screen.text_color.red = get(DMX_CHANNEL_COLOR_R)
-    screen.text_color.green = get(DMX_CHANNEL_COLOR_G)
-    screen.text_color.blue = get(DMX_CHANNEL_COLOR_B)
+    screen.text_color.red = _get_color(DMX_CHANNEL_COLOR_R)
+    screen.text_color.green = _get_color(DMX_CHANNEL_COLOR_G)
+    screen.text_color.blue = _get_color(DMX_CHANNEL_COLOR_B)
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
     if order > 0:
-        _manage_order(ascenseur, order)
+        _manage_order(ascenseur, screen, order)
 
         return
 
