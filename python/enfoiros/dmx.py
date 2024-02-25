@@ -167,3 +167,7 @@ def manage(screen, ascenseur):
         _manage_bullshit(screen, bullshit)
 
         return
+    else:
+        # We reset the bullshit, so that we can remove the 
+        # Gif from the screen.
+        screen.bullshit = None
