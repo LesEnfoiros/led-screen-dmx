@@ -6,7 +6,7 @@ After=syslog.target network-online.target
 [Service]
 Type=simple
 Restart=on-failure
-ExecStart=/home/pi/enfoiros/ascenseur/python/start.sh
+ExecStart=/home/pi/enfoiros/ascenseur/service/service.sh
 RestartSec=5
 KillMode=process
 
