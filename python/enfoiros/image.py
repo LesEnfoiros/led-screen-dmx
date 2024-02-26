@@ -1,10 +1,11 @@
 from PIL import Image
+from .screen import path
 import time
 
 class Image:
     # Initialize the GIF.
-    def __init__(self, path):
-        self.path = path
+    def __init__(self, asset):
+        self.path = path(asset)
 
     # Load the gif.
     def load(self, screen):

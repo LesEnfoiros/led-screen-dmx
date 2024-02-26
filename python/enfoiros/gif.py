@@ -1,4 +1,5 @@
 from PIL import Image
+from .screen import path
 import sys
 
 class Gif:
@@ -17,7 +18,7 @@ class Gif:
 
     # Load the gif.
     def load(self, screen):
-        gif = Image.open(self.path)
+        gif = Image.open(path("assets/gif/" + self.path))
 
         try:
             self.num_frames = gif.n_frames

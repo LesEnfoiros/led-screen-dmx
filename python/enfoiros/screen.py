@@ -1,10 +1,17 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 import time
+import os
+
+CURRENT_FOLDER = os.path.dirname(os.path.realpath(__file__))
+
+# Get the absolute path of the given asset.
+def path(asset):
+    return os.path.join(CURRENT_FOLDER, "../", asset)
 
 
 # GLOBAL VARIABLES.
 MATRIX_SIZE = 64
-FONT_ASSET = "assets/font-32x64.bdf"
+FONT_ASSET = path("assets/font-32x64.bdf")
 
 
 # This class interacts with the screen.

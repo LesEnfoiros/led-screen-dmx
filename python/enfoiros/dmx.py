@@ -140,30 +140,32 @@ def _manage_bullshit(screen, order: int):
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
     # Upper stairs.
-    if order >= 10 and order < 20 and current_path != "assets/gif/gyrophare.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/gyrophare.gif", 10)
-    elif order >= 20 and order < 30 and current_path != "assets/gif/oss117.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/oss117.gif", 5)
-    elif order >= 30 and order < 40 and current_path != "assets/gif/ah.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/ah.gif", 10)
-    elif order >= 40 and order < 50 and current_path != "assets/gif/marc.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/marc.gif", 10)
-    elif order >= 50 and order < 60 and current_path != "assets/gif/fire.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/fire.gif", 10)
-    elif order >= 60 and order < 70 and current_path != "assets/gif/loading.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/loading.gif", 10)
-    elif order >= 70 and order < 80 and current_path != "assets/gif/notre-projet.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/notre-projet.gif", 5)
-    elif order >= 80 and order < 90 and current_path != "assets/gif/zzz.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/zzz.gif", 10)
-    elif order >= 90 and order < 100 and current_path != "assets/gif/eyes.gif":
-        screen.bullshit = Gif.build(screen, "assets/gif/eyes.gif", 2)
+    if order >= 10 and order < 20 and current_path != "gyrophare.gif":
+        screen.bullshit = Gif.build(screen, "gyrophare.gif", 10)
+    elif order >= 20 and order < 30 and current_path != "oss117.gif":
+        screen.bullshit = Gif.build(screen, "oss117.gif", 5)
+    elif order >= 30 and order < 40 and current_path != "ah.gif":
+        screen.bullshit = Gif.build(screen, "ah.gif", 10)
+    elif order >= 40 and order < 50 and current_path != "marc.gif":
+        screen.bullshit = Gif.build(screen, "marc.gif", 10)
+    elif order >= 50 and order < 60 and current_path != "fire.gif":
+        screen.bullshit = Gif.build(screen, "fire.gif", 10)
+    elif order >= 60 and order < 70 and current_path != "loading.gif":
+        screen.bullshit = Gif.build(screen, "loading.gif", 10)
+    elif order >= 70 and order < 80 and current_path != "notre-projet.gif":
+        screen.bullshit = Gif.build(screen, "notre-projet.gif", 5)
+    elif order >= 80 and order < 90 and current_path != "zzz.gif":
+        screen.bullshit = Gif.build(screen, "zzz.gif", 10)
+    elif order >= 90 and order < 100 and current_path != "eyes.gif":
+        screen.bullshit = Gif.build(screen, "eyes.gif", 2)
+
 
 # Get the color from the DMX signal.
 def _get_color(channel: int):
     value = get(channel)
 
     return value if value >= 0 else 0
+
 
 # Globally manage the DMX signals.
 def manage(screen, ascenseur):
