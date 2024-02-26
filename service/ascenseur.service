@@ -1,0 +1,14 @@
+[Unit]
+Description=Démarre l'ascenseur du spectacle Enfoiros de 2024
+Wants=network.service
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/home/pi/enfoiros/ascenseur/python/start.sh
+RestartSec=5
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
