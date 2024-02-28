@@ -13,6 +13,8 @@ FILES=( /tmp/*.socket )
 SOCKET_FILE=$(basename -- "${FILES[0]}")
 PORT="${SOCKET_FILE%.*}"
 
+echo "[INFO] Contacting port $PORT"
+
 # And execute the command given by the user.
 (
     echo $ARGS
