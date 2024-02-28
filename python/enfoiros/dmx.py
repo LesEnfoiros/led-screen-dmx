@@ -157,14 +157,14 @@ def _manage_order(ascenseur, screen, order: int):
     # If the order said to go to a specific stair.
     if new_stair is not None:
         ascenseur.goToStair(new_stair)
-        screen.order_img = None
+        screen.bullshit = None
         
 
 # Manage the bullshit channel.
 def _manage_bullshit(screen, order: int):
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
-    # Upper stairs.
+    # Render gifs.
     if order >= 10 and order < 20 and current_path != "gyrophare.gif":
         screen.bullshit = Gif.build(screen, "gyrophare.gif", 10)
     elif order >= 20 and order < 30 and current_path != "oss117.gif":
@@ -186,8 +186,8 @@ def _manage_bullshit(screen, order: int):
 
     # Logo des restos.
     elif order >= 210 and order < 220:
-        screen.order_img = Image("assets/restos.png")
-        screen.order_img.load()
+        screen.bullshit = Image("assets/restos.png")
+        screen.bullshit.load()
 
 
 # Get the color from the DMX signal.

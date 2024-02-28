@@ -24,13 +24,11 @@ try:
     print("Press CTRL-C to stop sample")
 
     while True:
-        if screen.order_img is not None:
-            screen.order_img.render(screen)
-        elif screen.bullshit is None:
+        if screen.bullshit is None:
             screen.clear()
             ascenseur.render(screen=screen)
             screen.swap()
-        else:
+        else: 
             screen.bullshit.render(screen)
 
         DMX.manage(screen, ascenseur)
