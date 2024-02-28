@@ -17,7 +17,9 @@ date
 echo "======================================"
 
 # Clean the service folder from socket files.
-rm $CURRENT_DIR/*.socket
+if compgen -G "$CURRENT_DIR/*.socket" > /dev/null; then
+    rm $CURRENT_DIR/*.socket
+fi
 
 # And... execute the script.
 sudo python3 $CURRENT_DIR/../python/main.py 
