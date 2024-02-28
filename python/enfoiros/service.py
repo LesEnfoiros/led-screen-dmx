@@ -97,8 +97,7 @@ def _clean_order(type, order: str):
 def manage_order(screen, ascenseur, order: str):
     # If we received a GIF order.
     if order.startswith('bullshit'):
-        id = _clean_order('bullshit', order)
-        DMX.set_static_value(DMX.DMX_CHANNEL_BULLSHIT, id if id > 0 else None)
+        DMX.set_static_value(DMX.DMX_CHANNEL_BULLSHIT, _clean_order('bullshit', order))
 
     # If the received an order to go to a specific stair.
     elif order.startswith('order'):

@@ -162,12 +162,6 @@ def _manage_order(ascenseur, screen, order: int):
 
 # Manage the bullshit channel.
 def _manage_bullshit(screen, order: int):
-    # If the order says to display nothing, then
-    # reset the bullshit.
-    """if order >= 0 and order < 10:
-        screen.bullshit = None
-        return"""
-    
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
     # Render gifs.
