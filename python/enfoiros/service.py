@@ -17,7 +17,7 @@ SOCK = None
 # Get the path of the file identifying the
 # port number for the current script.
 def _get_file_name():
-    return os.path.join(BASE_PATH, str(PORT) + ".socket")
+    return "/tmp/" + str(PORT) + ".socket"
 
 
 # Start the thread listening the DMX values.

@@ -9,7 +9,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ARGS=$@
 
 # Get the port from the file name.
-FILES=( $CURRENT_DIR/*.socket )
+FILES=( /tmp/*.socket )
 SOCKET_FILE=$(basename -- "${FILES[0]}")
 PORT="${SOCKET_FILE%.*}"
 

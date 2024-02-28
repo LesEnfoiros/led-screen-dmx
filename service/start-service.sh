@@ -17,8 +17,8 @@ date
 echo "======================================"
 
 # Clean the service folder from socket files.
-if compgen -G "$CURRENT_DIR/*.socket" > /dev/null; then
-    rm $CURRENT_DIR/*.socket
+if compgen -G "/tmp/*.socket" > /dev/null; then
+    rm /tmp/*.socket
 fi
 
 # And... execute the script.
