@@ -97,6 +97,16 @@ def _thread():
 def _manage_order(ascenseur, screen, order: int):
     new_stair = None
 
+    # If the ascenseur should be hidden, then
+    # do nothing more than setting the value.
+    # to the hide parameter.
+    if order >= 0 and order < 10:
+        ascenseur.hide = True
+        return
+
+    # If not, then the ascenseur should not hide.
+    ascenseur.hide = False
+
     # Upper stairs.
     if order >= 10 and order < 20:
         new_stair = 9
@@ -140,14 +150,9 @@ def _manage_order(ascenseur, screen, order: int):
         new_stair = -9
     
     # HS animation.
-    elif order >= 200 and order < 210:
+    elif order >= 200:
         ascenseur.is_hors_service = True
         ascenseur.target_stair = ascenseur.current_stair
-    
-    # Logo des restos.
-    elif order >= 210 and order < 220:
-        screen.order_img = Image("assets/restos.png")
-        screen.order_img.load()
 
     # If the order said to go to a specific stair.
     if new_stair is not None:
@@ -178,6 +183,11 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "zzz.gif", 10)
     elif order >= 90 and order < 100 and current_path != "eyes.gif":
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
+
+    # Logo des restos.
+    elif order >= 210 and order < 220:
+        screen.order_img = Image("assets/restos.png")
+        screen.order_img.load()
 
 
 # Get the color from the DMX signal.

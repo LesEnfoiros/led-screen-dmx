@@ -11,6 +11,7 @@ class Ascenseur:
         self.current_stair = 0
         self.target_stair = 0 
         self.is_hors_service = False
+        self.hide = False
 
 
     # Draw the minux sign in the screen.
@@ -46,7 +47,12 @@ class Ascenseur:
     # Render the ascenseur. This method is not
     # always called.
     def render(self, screen):
-        if self.is_hors_service:
+        # If the ascenseur should hide, then do nothing.
+        if self.hide:
+            screen.sleep(SECONDS_BETWEEN_FRAME)
+
+        # If the ascenseur is out of service.
+        elif self.is_hors_service:
             rand = random.randint(0, 10)
 
             # This is done to make the "HS" text "strobbing".""
@@ -56,6 +62,8 @@ class Ascenseur:
                 screen.drawText(" S", 0, screen.font_baseline)
             elif rand % 10 != 9:
                 screen.drawText("HS", 0, screen.font_baseline)
+
+        # Otherwise, render the ascenseur.
         else:
             is_negative = self.current_stair < 0
             level = - self.current_stair if is_negative else self.current_stair
