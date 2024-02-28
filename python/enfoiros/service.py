@@ -85,7 +85,7 @@ def _thread(screen, ascenseur):
         time.sleep(1)
         conn.close()
 
-    print("End of thread")
+    print("[END] End of service thread")
 
 
 # Clean the input received from the command line.

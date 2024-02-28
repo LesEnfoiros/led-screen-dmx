@@ -90,7 +90,7 @@ def _thread():
 
         time.sleep(0.2)
 
-    print("DMX thread stopped")
+    print("[STOP] DMX thread stopped")
 
 # Manage the orders coming from the DMX regarding
 # where the ascenseur should go.
@@ -162,6 +162,12 @@ def _manage_order(ascenseur, screen, order: int):
 
 # Manage the bullshit channel.
 def _manage_bullshit(screen, order: int):
+    # If the order says to display nothing, then
+    # reset the bullshit.
+    if order >= 0 and order < 10:
+        screen.bullshit = None
+        return
+    
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
     # Render gifs.
@@ -187,7 +193,7 @@ def _manage_bullshit(screen, order: int):
     # Logo des restos.
     elif order >= 210 and order < 220:
         screen.bullshit = Image("assets/restos.png")
-        screen.bullshit.load()
+        screen.bullshit.load(screen)
 
 
 # Get the color from the DMX signal.
