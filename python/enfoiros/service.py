@@ -1,18 +1,13 @@
-from .screen import BASE_PYTHON_FOLDER
 from . import dmx as DMX
 import threading
 import socket
 import time
 import os
 
-# Constants.
-BASE_PATH = os.path.join(BASE_PYTHON_FOLDER, "../service")
-
 # Variables.
 THREAD = None
 PORT = None
 SOCK = None
-
 
 # Get the path of the file identifying the
 # port number for the current script.
@@ -90,16 +85,15 @@ def _thread(screen, ascenseur):
         time.sleep(1)
         conn.close()
 
-    print("end of thread")
+    print("End of thread")
 
+
+# Manage the order coming from the command line.
 def manage_order(screen, ascenseur, order: str):
-    print("Order : %s" % order)
-
+    # If we received a GIF order.
     if order.startswith('gif'):
         id = int(order.replace('gif', '').strip(' '))
 
-        print("id: %d" % id)
         DMX.set_static_value(DMX.DMX_CHANNEL_BULLSHIT, id)
 
-
-    return "superbe command : " + str(order)
+    return "Executed command: " + str(order)

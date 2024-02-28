@@ -17,4 +17,4 @@ PORT="${SOCKET_FILE%.*}"
 (
     echo $ARGS
     sleep 0.2
-) | telnet localhost $PORT 2> /dev/null
+) | nc localhost $PORT 2> /dev/null

@@ -48,12 +48,15 @@ def stop():
 
 # Get the value from the registries.
 def get(channel: int):
+    if channel in dmx_static_values and dmx_static_values[channel] is not None:
+        return dmx_static_values[channel]
+    
     return 0 if not channel in dmx_values else dmx_values[channel]
 
 
 # Set a static value to the DMX channel to interact
 # with the ascenseur from the command line.
-def set_static_value(channel: int, value: int):
+def set_static_value(channel: int, value = None):
     dmx_static_values[channel] = value
 
 
@@ -70,7 +73,7 @@ def _update_channel_value_from_i2c(channel: int):
 
     # We reset the static values if a real value was
     # received from DMX.
-    if dmx_values[channel] > 0 and dmx_static_values[channel] is not None:
+    if dmx_values[channel] > 0 and channel in dmx_static_values and dmx_static_values[channel] is not None:
         dmx_static_values[channel] = None
 
 
