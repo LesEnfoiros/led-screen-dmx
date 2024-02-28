@@ -209,14 +209,10 @@ def manage(screen, ascenseur):
     if order > 0:
         _manage_order(ascenseur, screen, order)
 
-        return
-
     # Display the bullshit if needed.
     bullshit = get(DMX_CHANNEL_BULLSHIT)
     if bullshit > 0:
         _manage_bullshit(screen, bullshit)
-
-        return
     else:
         # We reset the bullshit, so that we can remove the 
         # Gif from the screen.
