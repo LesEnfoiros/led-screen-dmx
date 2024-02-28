@@ -164,9 +164,9 @@ def _manage_order(ascenseur, screen, order: int):
 def _manage_bullshit(screen, order: int):
     # If the order says to display nothing, then
     # reset the bullshit.
-    if order >= 0 and order < 10:
+    """if order >= 0 and order < 10:
         screen.bullshit = None
-        return
+        return"""
     
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
@@ -191,8 +191,8 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
 
     # Logo des restos.
-    elif order >= 210 and order < 220:
-        screen.bullshit = Image("assets/restos.png")
+    elif order >= 210 and order < 220 and current_path != "restos.png" :
+        screen.bullshit = Image("restos.png")
         screen.bullshit.load(screen)
 
 

@@ -9,7 +9,7 @@ class Image:
 
     # Load the gif.
     def load(self, screen):
-        image = Image.open(path(self.path))
+        image = Image.open(path("assets/" + self.path))
         image.thumbnail((screen.matrix.width, screen.matrix.height), Image.ANTIALIAS)
 
         screen.matrix.SetImage(image.convert('RGB'))
