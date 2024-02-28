@@ -211,7 +211,7 @@ def manage(screen, ascenseur):
 
     # Display the bullshit if needed.
     bullshit = get(DMX_CHANNEL_BULLSHIT)
-    if bullshit > 0:
+    if order < 10 and bullshit >= 10:
         _manage_bullshit(screen, bullshit)
     else:
         # We reset the bullshit, so that we can remove the 
