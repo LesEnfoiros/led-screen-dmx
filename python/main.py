@@ -1,5 +1,6 @@
 from enfoiros import Ascenseur, Screen
 import enfoiros.dmx as DMX 
+import enfoiros.service as Service
 import sys
 
 # Initialize the DMX before initiating the
@@ -13,6 +14,10 @@ ascenseur = Ascenseur()
 # Then, start the DMX thread to dynamically
 # get the values from the Arduino.
 DMX.start()
+
+# Start the service, so that we can communicate
+# with him when the ascenseur is running.
+Service.start(screen, ascenseur)
 
 try:
     # Start loop
@@ -32,4 +37,5 @@ try:
 except KeyboardInterrupt:
     print("Exiting\n")
     DMX.stop()
+    Service.stop()
     sys.exit(0)

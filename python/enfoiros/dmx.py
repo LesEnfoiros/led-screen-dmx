@@ -16,6 +16,7 @@ DMX_CHANNEL_ORDER    = 5
 # Variables.
 dmx_fd = None
 dmx_values = {}
+dmx_static_values = {} # Used to manually set values to the DMX fields.
 _thread_should_run = True
 
 # Make a connection with the I2C client.
@@ -32,19 +33,29 @@ def connect():
         print("Erreur lors de l'ouverture de la connexion I2C")
         exit()
 
+
 # Start the thread listening the DMX values.
 def start():
     thread = threading.Thread(target=_thread)
     thread.start()
+
 
 # Stop the thread.
 def stop():
     global _thread_should_run
     _thread_should_run = False
 
-# GEt the value from the registries.
+
+# Get the value from the registries.
 def get(channel: int):
-    return dmx_values[channel]
+    return 0 if not channel in dmx_values else dmx_values[channel]
+
+
+# Set a static value to the DMX channel to interact
+# with the ascenseur from the command line.
+def set_static_value(channel: int, value: int):
+    dmx_static_values[channel] = value
+
 
 # Read a value from the i2c.
 def _update_channel_value_from_i2c(channel: int):
@@ -56,6 +67,12 @@ def _update_channel_value_from_i2c(channel: int):
 
     # Put the value in a buffer.
     dmx_values[channel] = wp.wiringPiI2CRead(dmx_fd)
+
+    # We reset the static values if a real value was
+    # received from DMX.
+    if dmx_values[channel] > 0 and dmx_static_values[channel] is not None:
+        dmx_static_values[channel] = None
+
 
 # Thread internal function.
 def _thread():

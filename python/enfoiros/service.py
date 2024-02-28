@@ -1,4 +1,5 @@
 from .screen import BASE_PYTHON_FOLDER
+from . import dmx as DMX
 import threading
 import socket
 import time
@@ -98,5 +99,7 @@ def manage_order(screen, ascenseur, order: str):
         id = int(order.replace('gif', '').strip(' '))
 
         print("id: %d" % id)
+        DMX.set_static_value(DMX.DMX_CHANNEL_BULLSHIT, id)
+
 
     return "superbe command : " + str(order)
