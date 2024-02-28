@@ -88,12 +88,23 @@ def _thread(screen, ascenseur):
     print("End of thread")
 
 
+# Clean the input received from the command line.
+def _clean_order(type, order: str):
+    return int(order.replace(type, '').strip(' '))
+    
+
 # Manage the order coming from the command line.
 def manage_order(screen, ascenseur, order: str):
     # If we received a GIF order.
-    if order.startswith('gif'):
-        id = int(order.replace('gif', '').strip(' '))
+    if order.startswith('bullshit'):
+        id = _clean_order('bullshit', order)
+        DMX.set_static_value(DMX.DMX_CHANNEL_BULLSHIT, id if id > 0 else None)
 
-        DMX.set_static_value(DMX.DMX_CHANNEL_BULLSHIT, id)
+    # If the received an order to go to a specific stair.
+    elif order.startswith('order'):
+        DMX.set_static_value(DMX.DMX_CHANNEL_ORDER, _clean_order('order', order))
+        DMX.set_static_value(DMX.DMX_CHANNEL_COLOR_R, 255)
+        DMX.set_static_value(DMX.DMX_CHANNEL_COLOR_G, 255)
+        DMX.set_static_value(DMX.DMX_CHANNEL_COLOR_B, 255)
 
     return "Executed command: " + str(order)
