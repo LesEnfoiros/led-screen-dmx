@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# This software starts the service after cleaning
+# the previous files.
+#
+# Author: Damien MOLINA
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
@@ -10,6 +15,9 @@ exec 2>&1
 echo "======================================"
 date
 echo "======================================"
+
+# Clean the service folder from socket files.
+rm $CURRENT_DIR/*.socket
 
 # And... execute the script.
 sudo python3 $CURRENT_DIR/../python/main.py 

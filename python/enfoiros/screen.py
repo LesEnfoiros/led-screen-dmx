@@ -2,11 +2,11 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 import time
 import os
 
-CURRENT_FOLDER = os.path.dirname(os.path.realpath(__file__))
+BASE_PYTHON_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../")
 
 # Get the absolute path of the given asset.
 def path(asset):
-    return os.path.join(CURRENT_FOLDER, "../", asset)
+    return os.path.join(BASE_PYTHON_FOLDER, asset)
 
 
 # GLOBAL VARIABLES.
