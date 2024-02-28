@@ -206,7 +206,7 @@ def manage(screen, ascenseur):
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
-    if order > 0:
+    if order >= 0:
         _manage_order(ascenseur, screen, order)
 
     # Display the bullshit if needed.
