@@ -163,6 +163,7 @@ def _manage_order(ascenseur, screen, order: int):
 # Manage the bullshit channel.
 def _manage_bullshit(screen, order: int):
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
+    print("Current order: ", order)
 
     # Render gifs.
     if order >= 10 and order < 20 and current_path != "gyrophare.gif":
@@ -178,14 +179,14 @@ def _manage_bullshit(screen, order: int):
     elif order >= 60 and order < 70 and current_path != "loading.gif":
         screen.bullshit = Gif.build(screen, "loading.gif", 10)
     elif order >= 70 and order < 80 and current_path != "notre-projet.gif":
-        screen.bullshit = Gif.build(screen, "notre-projet.gif", 5)
+        screen.bullshit = Gif.build(screen, "notre-projet.gif", 10)
     elif order >= 80 and order < 90 and current_path != "zzz.gif":
         screen.bullshit = Gif.build(screen, "zzz.gif", 10)
     elif order >= 90 and order < 100 and current_path != "eyes.gif":
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
 
     # Logo des restos.
-    elif order >= 210 and order < 220 and current_path != "restos.png" :
+    elif order >= 200 and order < 220 and current_path != "restos.png" :
         screen.bullshit = Image("restos.png")
         screen.bullshit.load(screen)
 
