@@ -9,7 +9,7 @@ DMX_I2C_ID           = 0x08
 DMX_CHANNEL_COLOR_R  = 0
 DMX_CHANNEL_COLOR_G  = 1
 DMX_CHANNEL_COLOR_B  = 2
-DMX_CHANNEL_ONOFF    = 3
+#DMX_CHANNEL_ONOFF    = 3
 DMX_CHANNEL_BULLSHIT = 4
 DMX_CHANNEL_ORDER    = 5
 
@@ -84,7 +84,7 @@ def _thread():
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_R)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_G)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_B)
-        _update_channel_value_from_i2c(DMX_CHANNEL_ONOFF)
+        #_update_channel_value_from_i2c(DMX_CHANNEL_ONOFF)
         _update_channel_value_from_i2c(DMX_CHANNEL_BULLSHIT)
         _update_channel_value_from_i2c(DMX_CHANNEL_ORDER)
 
@@ -163,7 +163,6 @@ def _manage_order(ascenseur, screen, order: int):
 # Manage the bullshit channel.
 def _manage_bullshit(screen, order: int):
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
-    print("Current order: ", order)
 
     # Render gifs.
     if order >= 10 and order < 20 and current_path != "gyrophare.gif":
@@ -207,13 +206,11 @@ def manage(screen, ascenseur):
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
-    print("Current order: ", order)
     if order >= 0:
         _manage_order(ascenseur, screen, order)
 
     # Display the bullshit if needed.
     bullshit = get(DMX_CHANNEL_BULLSHIT)
-    print("Current bullshit: ", bullshit)
     if order < 10 and bullshit >= 10:
         _manage_bullshit(screen, bullshit)
     else:
