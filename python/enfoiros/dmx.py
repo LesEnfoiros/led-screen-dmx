@@ -207,11 +207,13 @@ def manage(screen, ascenseur):
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
+    print("Current order: ", order)
     if order >= 0:
         _manage_order(ascenseur, screen, order)
 
     # Display the bullshit if needed.
     bullshit = get(DMX_CHANNEL_BULLSHIT)
+    print("Current bullshit: ", bullshit)
     if order < 10 and bullshit >= 10:
         _manage_bullshit(screen, bullshit)
     else:
