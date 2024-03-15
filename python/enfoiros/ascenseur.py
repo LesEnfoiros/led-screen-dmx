@@ -1,7 +1,7 @@
 import random
 
 # GLOBAL VARIABLES.
-SECONDS_BETWEEN_FRAME = 1
+SECONDS_BETWEEN_FRAME = 0.2
 ARROW_WIDTH = 30
 
 class Ascenseur:
@@ -46,10 +46,10 @@ class Ascenseur:
 
     # Render the ascenseur. This method is not
     # always called.
-    def render(self, screen):
+    def render(self, screen, frame):
         # If the ascenseur should hide, then do nothing.
         if self.hide:
-            screen.sleep(SECONDS_BETWEEN_FRAME)
+            screen.sleep(0.2)
 
         # If the ascenseur is out of service.
         elif self.is_hors_service:
@@ -79,7 +79,7 @@ class Ascenseur:
             self._drawArrow(screen)
 
             # Move to the next stair if needed.
-            if self.current_stair != self.target_stair:
+            if (frame % 5 == 0) and self.current_stair != self.target_stair:
                 self.current_stair += -1 if self.current_stair > self.target_stair else 1
 
             screen.sleep(SECONDS_BETWEEN_FRAME)

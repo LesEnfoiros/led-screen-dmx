@@ -87,6 +87,7 @@ def _thread():
         _update_channel_value_from_i2c(DMX_CHANNEL_BULLSHIT)
         _update_channel_value_from_i2c(DMX_CHANNEL_ORDER)
 
+        # Then, wait for the next loop.
         time.sleep(0.2)
 
     print("[STOP] DMX thread stopped")
@@ -149,7 +150,7 @@ def _manage_order(ascenseur, screen, order: int):
         new_stair = -9
     
     # HS animation.
-    elif order >= 200:
+    elif order >= 220 and order < 230:
         ascenseur.is_hors_service = True
         ascenseur.target_stair = ascenseur.current_stair
 

@@ -23,11 +23,14 @@ try:
     # Start loop
     print("Press CTRL-C to stop sample")
 
+    i = 0
     while True:
         if screen.bullshit is None:
             screen.clear()
-            ascenseur.render(screen=screen)
+            ascenseur.render(screen=screen, frame=i)
             screen.swap()
+
+            i += 1
         else: 
             screen.bullshit.render(screen)
 
