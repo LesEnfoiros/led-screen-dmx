@@ -11,7 +11,7 @@ class Ascenseur:
         self.current_stair = 0
         self.target_stair = 0 
         self.is_hors_service = False
-        self.hide = False
+        self.hide = True
 
 
     # Draw the minux sign in the screen.

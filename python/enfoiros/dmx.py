@@ -1,6 +1,5 @@
 import wiringpi as wp
 from .gif import Gif
-from .image import Image
 import threading
 import time
 
@@ -186,9 +185,7 @@ def _manage_bullshit(screen, order: int):
 
     # Logo des restos.
     elif order >= 200 and order < 220 and current_path != "restos.png" :
-        screen.bullshit = Gif.build(screen, "restos.gif", 1000)
-        #screen.bullshit = Image("restos.png")
-        #screen.bullshit.load(screen)
+        screen.bullshit = Gif.build(screen, "restos.gif", 10)
 
 
 # Get the color from the DMX signal.
