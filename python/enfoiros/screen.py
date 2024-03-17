@@ -58,7 +58,7 @@ class Screen:
     # Swap the screen for the next frame.
     def swap(self):
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
-        self.canvas.brightness = self.brigthness
+        self.canvas.brightness = self.brightness
 
     # Draw a text in the screen.
     def drawText(self, text, x, y):
