@@ -45,7 +45,9 @@ class Gif:
         canvas.brightness = screen.brightness
         screen.matrix.SwapOnVSync(canvas, framerate_fraction=self.rate)
 
-        if self.current_frame == self.num_frames - 1:
+        if screen.brightness == 0:
+            self.clear()
+        elif self.current_frame == self.num_frames - 1:
             self.current_frame = 0
         else:
             self.current_frame += 1
