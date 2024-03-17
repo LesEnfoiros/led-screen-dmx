@@ -40,7 +40,9 @@ class Gif:
 
     # Render the GIF.
     def render(self, screen):
-        screen.matrix.SwapOnVSync(self.canvases[self.current_frame], framerate_fraction=self.rate)
+        canvas = self.canvases[self.current_frame]
+        canvas.brightness = screen.brightness
+        screen.matrix.SwapOnVSync(canvas, framerate_fraction=self.rate)
 
         if self.current_frame == self.num_frames - 1:
             self.current_frame = 0

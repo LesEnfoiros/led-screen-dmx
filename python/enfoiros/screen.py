@@ -18,6 +18,7 @@ FONT_ASSET = path("assets/font-32x64.bdf")
 class Screen:
     def __init__(self):
         self.bullshit = None
+        self.brigthness = 100 # Default brightness of the screen
         self._load_matrix()
         self._load_font()
 
@@ -52,11 +53,12 @@ class Screen:
     # Set the screen brightness.
     # Value between 1 and 100.
     def setBrightness(self, value: int):
-        self.matrix.SetBrightness(value)
+        self.brigthness = value
 
     # Swap the screen for the next frame.
     def swap(self):
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
+        self.canvas.brightness = self.brigthness
 
     # Draw a text in the screen.
     def drawText(self, text, x, y):
