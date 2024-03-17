@@ -4,13 +4,13 @@ import threading
 import time
 
 # GLOBAL DMX VARIABLES.
-DMX_I2C_ID           = 0x08
-DMX_CHANNEL_COLOR_R  = 0
-DMX_CHANNEL_COLOR_G  = 1
-DMX_CHANNEL_COLOR_B  = 2
-#DMX_CHANNEL_ONOFF    = 3
-DMX_CHANNEL_ORDER    = 3
-DMX_CHANNEL_BULLSHIT = 4
+DMX_I2C_ID            = 0x08
+DMX_CHANNEL_INTENSITY = 0
+DMX_CHANNEL_COLOR_R   = 1
+DMX_CHANNEL_COLOR_G   = 2
+DMX_CHANNEL_COLOR_B   = 3
+DMX_CHANNEL_ORDER     = 4
+DMX_CHANNEL_BULLSHIT  = 5
 
 # Variables.
 dmx_fd = None
@@ -34,8 +34,8 @@ def connect():
 
 
 # Start the thread listening the DMX values.
-def start():
-    thread = threading.Thread(target=_thread)
+def start(screen, ascenseur):
+    thread = threading.Thread(target=_thread, args=(screen, ascenseur))
     thread.start()
 
 
@@ -77,15 +77,20 @@ def _update_channel_value_from_i2c(channel: int):
 
 
 # Thread internal function.
-def _thread():
+def _thread(screen, ascenseur):
     # Lire des données depuis le périphérique I2C
     while(_thread_should_run):
+        _update_channel_value_from_i2c(DMX_CHANNEL_INTENSITY)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_R)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_G)
         _update_channel_value_from_i2c(DMX_CHANNEL_COLOR_B)
-        #_update_channel_value_from_i2c(DMX_CHANNEL_ONOFF)
         _update_channel_value_from_i2c(DMX_CHANNEL_BULLSHIT)
         _update_channel_value_from_i2c(DMX_CHANNEL_ORDER)
+
+        # Manage the brightness.
+        screen.setBrightness(
+            int(get(DMX_CHANNEL_INTENSITY) / 255)
+        )
 
         # Then, wait for the next loop.
         time.sleep(0.2)
@@ -164,9 +169,11 @@ def _manage_order(ascenseur, screen, order: int):
 def _manage_bullshit(screen, order: int):
     current_path = screen.bullshit.path if screen.bullshit is not None else ""
 
+    # Logo des restos.
+    if order >= 10 and order < 20 and current_path != "restos.gif":
+        screen.bullshit = Gif.build(screen, "restos.gif", 10)
+
     # Render gifs.
-    if order >= 10 and order < 20 and current_path != "gyrophare.gif":
-        screen.bullshit = Gif.build(screen, "gyrophare.gif", 10)
     elif order >= 20 and order < 30 and current_path != "oss117.gif":
         screen.bullshit = Gif.build(screen, "oss117.gif", 5)
     elif order >= 30 and order < 40 and current_path != "ah.gif":
@@ -185,10 +192,24 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
     elif order >= 100 and order < 110 and current_path != "sam-cool-cool.gif":
         screen.bullshit = Gif.build(screen, "sam-cool-cool.gif", 10)
+    elif order >= 110 and order < 120 and current_path != "gyrophare.gif" :
+        screen.bullshit = Gif.build(screen, "gyrophare.gif", 10)
+    elif order >= 120 and order < 130 and current_path != "raquet.gif" :
+        screen.bullshit = Gif.build(screen, "raquet.gif", 10)
+    elif order >= 130 and order < 140 and current_path != "jyf.gif" :
+        screen.bullshit = Gif.build(screen, "jyf.gif", 10)
+    elif order >= 140 and order < 150 and current_path != "glissade.gif" :
+        screen.bullshit = Gif.build(screen, "glissade.gif", 10)
+    elif order >= 150 and order < 160 and current_path != "sens-interdit.gif" :
+        screen.bullshit = Gif.build(screen, "sens-interdit.gif", 10)
 
-    # Logo des restos.
-    elif order >= 210 and order < 220 and current_path != "restos.png" :
-        screen.bullshit = Gif.build(screen, "restos.gif", 10)
+    elif order >= 170 and order < 180 and current_path != "hide.gif" :
+        screen.bullshit = Gif.build(screen, "hide.gif", 10)
+    elif order >= 180 and order < 190 and current_path != "insa.gif" :
+        screen.bullshit = Gif.build(screen, "insa.gif", 10)
+    elif order >= 190 and order < 200 and current_path != "enfoiros.gif" :
+        screen.bullshit = Gif.build(screen, "enfoiros.gif", 10)
+
 
 
 # Get the color from the DMX signal.

@@ -49,6 +49,11 @@ class Screen:
     def clear(self):
         self.canvas.Clear()
 
+    # Set the screen brightness.
+    # Value between 1 and 100.
+    def setBrightness(self, value: int):
+        self.matrix.SetBrightness(value)
+
     # Swap the screen for the next frame.
     def swap(self):
         self.canvas = self.matrix.SwapOnVSync(self.canvas)

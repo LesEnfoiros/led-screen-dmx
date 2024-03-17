@@ -13,7 +13,7 @@ ascenseur = Ascenseur()
 
 # Then, start the DMX thread to dynamically
 # get the values from the Arduino.
-DMX.start()
+DMX.start(screen, ascenseur)
 
 # Start the service, so that we can communicate
 # with him when the ascenseur is running.
