@@ -89,7 +89,7 @@ def _thread(screen, ascenseur):
 
         # Manage the brightness.
         screen.setBrightness(
-            int(get(DMX_CHANNEL_INTENSITY) / 255)
+            100 * int(get(DMX_CHANNEL_INTENSITY) / 255)
         )
 
         # Then, wait for the next loop.
@@ -191,7 +191,7 @@ def _manage_bullshit(screen, order: int):
     elif order >= 90 and order < 100 and current_path != "eyes.gif":
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
     elif order >= 100 and order < 110 and current_path != "sam-cool-cool.gif":
-        screen.bullshit = Gif.build(screen, "sam-cool-cool.gif", 10)
+        screen.bullshit = Gif.build(screen, "sam-cool-cool.gif", 8)
     elif order >= 110 and order < 120 and current_path != "gyrophare.gif" :
         screen.bullshit = Gif.build(screen, "gyrophare.gif", 10)
     elif order >= 120 and order < 130 and current_path != "raquet.gif" :
