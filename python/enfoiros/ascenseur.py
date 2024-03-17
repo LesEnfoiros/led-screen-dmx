@@ -48,7 +48,7 @@ class Ascenseur:
     # always called.
     def render(self, screen, frame):
         # If the ascenseur should hide, then do nothing.
-        if self.hide:
+        if self.hide or screen.brightness == 0:
             screen.sleep(SECONDS_BETWEEN_FRAME)
 
         # If the ascenseur is out of service.
