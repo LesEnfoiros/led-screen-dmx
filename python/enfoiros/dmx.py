@@ -183,9 +183,11 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "zzz.gif", 10)
     elif order >= 90 and order < 100 and current_path != "eyes.gif":
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
+    elif order >= 100 and order < 110 and current_path != "sam-cool-cool.gif":
+        screen.bullshit = Gif.build(screen, "sam-cool-cool.gif", 10)
 
     # Logo des restos.
-    elif order >= 200 and order < 220 and current_path != "restos.png" :
+    elif order >= 210 and order < 220 and current_path != "restos.png" :
         screen.bullshit = Gif.build(screen, "restos.gif", 10)
 
 
