@@ -41,11 +41,6 @@ class Gif:
 
     # Render the GIF.
     def render(self, screen):
-        if screen.brightness == 0:
-            screen.clear()
-
-            return
-        
         canvas = self.canvases[self.current_frame]
         canvas.brightness = screen.brightness
         screen.matrix.SwapOnVSync(canvas, framerate_fraction=self.rate)
