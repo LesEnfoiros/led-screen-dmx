@@ -49,7 +49,7 @@ class Ascenseur:
     def render(self, screen, frame):
         # If the ascenseur should hide, then do nothing.
         if self.hide:
-            screen.sleep(0.2)
+            screen.sleep(SECONDS_BETWEEN_FRAME)
 
         # If the ascenseur is out of service.
         elif self.is_hors_service:
