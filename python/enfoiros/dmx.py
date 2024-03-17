@@ -88,9 +88,7 @@ def _thread(screen, ascenseur):
         _update_channel_value_from_i2c(DMX_CHANNEL_ORDER)
 
         # Manage the brightness.
-        screen.setBrightness(
-            100 * int(get(DMX_CHANNEL_INTENSITY) / 255)
-        )
+        screen.setBrightness(100.0 * get(DMX_CHANNEL_INTENSITY) / 255.0)
 
         # Then, wait for the next loop.
         time.sleep(0.2)
