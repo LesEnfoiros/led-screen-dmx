@@ -18,6 +18,7 @@ class Gif:
 
     # Load the gif.
     def load(self, screen):
+        print("Creating frame for: %s" % self.path)
         gif = Image.open(path("assets/gif/" + self.path))
 
         try:
