@@ -18,7 +18,7 @@ echo "======================================"
 
 # Clean the service folder from socket files.
 if compgen -G "/tmp/*.socket" > /dev/null; then
-    rm /tmp/*.socket
+    sudo rm /tmp/*.socket
 fi
 
 # And... execute the script.
