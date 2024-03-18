@@ -209,7 +209,6 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "enfoiros.gif", 10)
 
 
-
 # Get the color from the DMX signal.
 def _get_color(channel: int):
     value = get(channel)
@@ -217,12 +216,57 @@ def _get_color(channel: int):
     return value if value >= 0 else 0
 
 
+# This function manages the colors.
+COLOR_BUFFER_R = -1
+COLOR_BUFFER_G = -1
+COLOR_BUFFER_B = -1
+def _manage_color(screen, new_r, new_g, new_b):
+    global COLOR_BUFFER_R, COLOR_BUFFER_G, COLOR_BUFFER_B
+
+    # Keep the current values easily accessible.
+    current_r = screen.text_color.red
+    current_g = screen.text_color.green
+    current_b = screen.text_color.blue
+
+    # Set the color buffers if not yet initialized.
+    COLOR_BUFFER_R = COLOR_BUFFER_R if COLOR_BUFFER_R >= 0 else current_r
+    COLOR_BUFFER_G = COLOR_BUFFER_G if COLOR_BUFFER_G >= 0 else current_g
+    COLOR_BUFFER_B = COLOR_BUFFER_B if COLOR_BUFFER_B >= 0 else current_b
+
+    # Initialize some variables determining whether it is all dark.
+    current_is_fully_dark = (current_r == 0 and current_g == 0 and current_b == 0) or (get(DMX_CHANNEL_INTENSITY) == 0)
+    buffer_is_fully_dark = COLOR_BUFFER_R == 0 and COLOR_BUFFER_G == 0 and COLOR_BUFFER_B == 0
+    new_is_fully_dark = new_r == 0 and new_g == 0 and new_b == 0
+
+    # If we detect an anomaly in the color received.
+    if current_is_fully_dark and not new_is_fully_dark:
+        if buffer_is_fully_dark:
+            COLOR_BUFFER_R = new_r
+            COLOR_BUFFER_G = new_g
+            COLOR_BUFFER_B = new_b
+
+            return (current_r, current_g, current_b)
+        else:
+            return (new_r, new_g, new_b)
+
+    COLOR_BUFFER_R = new_r
+    COLOR_BUFFER_G = new_g
+    COLOR_BUFFER_B = new_b
+
+    return (new_r, new_g, new_b)
+
+
 # Globally manage the DMX signals.
 def manage(screen, ascenseur):
-    # Update the global color.
-    screen.text_color.red = _get_color(DMX_CHANNEL_COLOR_R)
-    screen.text_color.green = _get_color(DMX_CHANNEL_COLOR_G)
-    screen.text_color.blue = _get_color(DMX_CHANNEL_COLOR_B)
+    # Manage the colors.
+    red, green, blue = _manage_color(screen=screen, 
+        new_r=_get_color(DMX_CHANNEL_COLOR_R),
+        new_g=_get_color(DMX_CHANNEL_COLOR_G),
+        new_b=_get_color(DMX_CHANNEL_COLOR_B),
+    )
+    screen.text_color.red = red
+    screen.text_color.green = green
+    screen.text_color.blue = blue
 
     # Manage the orders for the ascenseur.
     order = get(DMX_CHANNEL_ORDER)
