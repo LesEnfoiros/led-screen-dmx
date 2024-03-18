@@ -54,6 +54,7 @@ class Screen:
     # Value between 1 and 100.
     def setBrightness(self, value: int):
         self.brightness = value
+        self.matrix.brightness = value
 
     # Swap the screen for the next frame.
     def swap(self):
