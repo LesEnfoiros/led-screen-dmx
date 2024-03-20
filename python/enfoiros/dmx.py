@@ -171,9 +171,11 @@ def _manage_bullshit(screen, order: int):
     if order >= 10 and order < 20 and current_path != "restos.gif":
         screen.bullshit = Gif.build(screen, "restos.gif", 20)
 
+    # Coluche.
+    if order >= 20 and order < 30 and current_path != "coluche.gif":
+        screen.bullshit = Gif.build(screen, "coluche.gif", 20)
+
     # Render gifs.
-    elif order >= 20 and order < 30 and current_path != "oss117.gif":
-        screen.bullshit = Gif.build(screen, "oss117.gif", 5)
     elif order >= 30 and order < 40 and current_path != "ah.gif":
         screen.bullshit = Gif.build(screen, "ah.gif", 10)
     elif order >= 40 and order < 50 and current_path != "marc.gif":
@@ -189,7 +191,7 @@ def _manage_bullshit(screen, order: int):
     elif order >= 90 and order < 100 and current_path != "eyes.gif":
         screen.bullshit = Gif.build(screen, "eyes.gif", 2)
     elif order >= 100 and order < 110 and current_path != "sam-cool-cool.gif":
-        screen.bullshit = Gif.build(screen, "sam-cool-cool.gif", 8)
+        screen.bullshit = Gif.build(screen, "sam-cool-cool.gif", 5)
     elif order >= 110 and order < 120 and current_path != "gyrophare.gif" :
         screen.bullshit = Gif.build(screen, "gyrophare.gif", 10)
     elif order >= 120 and order < 130 and current_path != "raquet.gif" :
@@ -207,6 +209,9 @@ def _manage_bullshit(screen, order: int):
         screen.bullshit = Gif.build(screen, "insa.gif", 10)
     elif order >= 190 and order < 200 and current_path != "enfoiros.gif" :
         screen.bullshit = Gif.build(screen, "enfoiros.gif", 10)
+
+    elif order >= 200 and order < 210 and current_path != "oss117.gif":
+        screen.bullshit = Gif.build(screen, "oss117.gif", 5)
 
 
 # Get the color from the DMX signal.
